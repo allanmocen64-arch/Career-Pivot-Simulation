@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Career Pivot Simulator</title>
+  <link rel="stylesheet" href="Career pivot.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="brand">
+        <div class="mark" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M4 17.5 9.5 12l3.5 3.5L20 8.5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M15 8.5h5v5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        PivotScope
+      </div>
+      <h1>Career Pivot Simulator</h1>
+      <p class="lede">Model a realistic move from the job you have into the role you want, with salary growth, skill gaps, timeline estimates, job-board links, course paths, and similar pivot stories in one workspace.</p>
+      <div class="mini-stats" aria-label="Platform highlights">
+        <div class="mini-stat"><b id="heroLift">+28%</b><span>projected salary lift</span></div>
+        <div class="mini-stat"><b id="heroMonths">9 mo</b><span>estimated transition</span></div>
+        <div class="mini-stat"><b id="heroSkills">5</b><span>priority skills</span></div>
+        <div class="mini-stat"><b id="heroJobs">124k</b><span>open role signal</span></div>
+      </div>
+      <div class="hero-actions">
+        <a class="hero-action" data-view-link="plan" href="#plan">Start simulation</a>
+        <a class="hero-action secondary" data-view-link="how" href="#how">How it works</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="topbar">
+        <div class="tabs" role="tablist" aria-label="Simulator views">
+          <button class="tab active" data-view="plan" type="button">Plan</button>
+          <button class="tab" data-view="jobs" type="button">Jobs</button>
+          <button class="tab" data-view="courses" type="button">Courses</button>
+          <button class="tab" data-view="how" type="button">How</button>
+        </div>
+        <div class="toolbar">
+          <span id="lastUpdated">Updated today</span>
+          <button class="icon-button" id="copySummary" type="button" title="Copy summary" aria-label="Copy summary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="2"/>
+              <path d="M5 16H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <section class="grid view" id="view-plan">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Simulate Your Move</h2>
+            <p>Choose the role shift and tune your constraints.</p>
+          </div>
+          <form class="form" id="pivotForm">
+
+            <label>
+              Current job
+              <div class="searchable-select" id="currentRoleWrapper">
+                <input id="currentRoleSearch" type="text" placeholder="Search or select your job…" autocomplete="off">
+                <div class="select-dropdown" id="currentRoleDropdown"></div>
+                <input type="hidden" id="currentRole" value="">
+              </div>
+            </label>
+
+            <label>
+              Desired career
+              <div class="searchable-select" id="targetRoleWrapper">
+                <input id="targetRoleSearch" type="text" placeholder="Search or select target career…" autocomplete="off">
+                <div class="select-dropdown" id="targetRoleDropdown"></div>
+                <input type="hidden" id="targetRole" value="">
+              </div>
+            </label>
+
+            <label>
+              Currency display
+              <select id="currency">
+                <option value="none">No currency</option>
+                <option value="KES" selected>Kenyan shilling</option>
+                <option value="USD">US dollar</option>
+                <option value="GBP">British pound</option>
+                <option value="EUR">Euro</option>
+                <option value="NGN">Nigerian naira</option>
+                <option value="INR">Indian rupee</option>
+                <option value="ZAR">South African rand</option>
+              </select>
+            </label>
+
+            <label>
+              Current monthly salary
+              <input id="salary" type="number" min="0" max="9999999" step="1000" placeholder="0">
+            </label>
+
+            <label>
+              Weekly study capacity
+              <div class="range-row">
+                <input id="hours" type="range" min="3" max="25" value="8">
+                <strong><span id="hoursValue">8</span>h</strong>
+              </div>
+            </label>
+
+            <label>
+              Existing transferable experience
+              <div class="range-row">
+                <input id="experience" type="range" min="0" max="10" value="0">
+                <strong><span id="experienceValue">0</span>/10</strong>
+              </div>
+            </label>
+
+            <button class="primary" type="submit">Run simulation</button>
+          </form>
+        </div>
+
+        <div class="results">
+          <div class="metrics">
+            <div class="metric"><span>Target salary</span><b id="targetSalary">—</b><small id="salaryNote">estimated monthly range</small></div>
+            <div class="metric"><span>Salary lift</span><b id="salaryLift">—</b><small>versus current salary</small></div>
+            <div class="metric"><span>Timeline</span><b id="timeline">—</b><small id="timelineNote">part-time pace</small></div>
+            <div class="metric"><span>Fit score</span><b id="fitScore">—</b><small>based on overlap</small></div>
+          </div>
+
+          <div class="wide-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Salary Projection</h3>
+                <p>Estimated path from today through early-role growth.</p>
+              </div>
+              <div class="chart" aria-label="Five year salary projection">
+                <div class="y-axis" id="yAxis"></div>
+                <div class="bars" id="salaryBars"></div>
+              </div>
+            </div>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Skill Gaps</h3>
+                <p>Prioritized by hiring signal and current overlap.</p>
+              </div>
+              <div class="skill-list" id="skillList"></div>
+            </div>
+          </div>
+
+          <div class="wide-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Transition Timeline</h3>
+                <p>Built around your weekly study capacity.</p>
+              </div>
+              <div class="timeline" id="timelineList"></div>
+            </div>
+            <div class="panel">
+              <div class="panel-header">
+                <h3>Similar Pivot Stories</h3>
+                <p>Composite examples based on common career paths.</p>
+              </div>
+              <div class="story-list" id="storyList"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="view view-page hidden" id="view-jobs">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Job Board Matches</h2>
+            <p>These links use the career you selected, so they open real job searches for your target role.</p>
+          </div>
+          <div class="resource-list" id="jobList"></div>
+        </div>
+      </section>
+
+      <section class="view view-page hidden" id="view-courses">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>Course Recommendations</h2>
+            <p>These course searches are mapped to your target career and the biggest skill gaps from the simulator.</p>
+          </div>
+          <div class="resource-list" id="courseList"></div>
+        </div>
+      </section>
+
+      <section class="view view-page hidden" id="view-how">
+        <div class="panel">
+          <div class="panel-header">
+            <h2>How It Works</h2>
+            <p>Use the simulator as a planning guide, then use the job and course pages to research real next steps.</p>
+          </div>
+          <div class="how-grid">
+            <article class="how-step">
+              <span>1</span>
+              <h3>Select your current career</h3>
+              <p>Search and select the work you do now from the dropdown. It can be anything — teacher, cashier, nurse, designer, or support agent.</p>
+            </article>
+            <article class="how-step">
+              <span>2</span>
+              <h3>Select your target career</h3>
+              <p>Search and select the career you want to move into. The app uses your selection for job searches and course suggestions.</p>
+            </article>
+            <article class="how-step">
+              <span>3</span>
+              <h3>Add your salary and time</h3>
+              <p>Put in your current salary, weekly study hours, and how much transferable experience you already have.</p>
+            </article>
+            <article class="how-step">
+              <span>4</span>
+              <h3>Read the plan</h3>
+              <p>The plan shows a salary estimate, possible skill gaps, a transition timeline specific to your pivot, and similar stories.</p>
+            </article>
+            <article class="how-step">
+              <span>5</span>
+              <h3>Open jobs and courses</h3>
+              <p>Use the Jobs and Courses pages to open real searches based on the career you selected.</p>
+            </article>
+            <article class="how-step">
+              <span>6</span>
+              <h3>Treat it as a guide</h3>
+              <p>The numbers are estimates — use them to compare paths and decide what to research more deeply.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="Career Pivot.js"></script>
+</body>
+</html>
