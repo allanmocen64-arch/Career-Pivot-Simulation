@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book a Table</title>
+    <link rel="stylesheet" href="Trench Restaurant web.css">
+    <link rel="stylesheet" href="booking.css">
+</head>
+<body>
+    <nav class="navbar">
+        <h1 class="logo">Trench Restaurant</h1>
+        <ul class="nav-links">
+            <li><a href="Trench Restaurant website.html">Menu</a></li>
+            <li><a href="Trench Restaurant website.html">Today's Specials</a></li>
+            <li><a href="Trench Restaurant website.html">Drinks</a></li>
+            <li><a href="Trench Restaurant website.html">Reviews</a></li>
+            <li><a href="Trench Restaurant website.html">Home</a></li>
+            <li><a href="About restaurant.html" target="_blank">About</a></li>
+
+        </ul>
+    </nav>
+    <section class="booking-hero">
+        <div class="booking-hero-content">
+            <div class="booking-tag">Reservations</div>
+            <h1>Book a <em>Table</em></h1>
+            <p>Experience the best dining experience at Trench Restaurant. Book your table now and indulge in our exquisite menu.</p>
+           
+        </div>
+    </section>
+
+    <section class="booking-section">
+        <div class="booking-container">
+            <div class="booking-info">
+                <h3>Visit Us</h3>
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div>
+                        <h4>Location</h4>
+                        <p>123 Food Street, Nairobi</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🕐</div>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Monday - Sunday</p>
+                        <p>8:00 AM - 10:00 PM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div>
+                        <h4>Phone</h4>
+                        <p>+254 731 186 096</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>info@thetrenchrestaurant.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="booking-form-container">
+                <h3>Make a Reservation</h3>
+                <div class="booking-form">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" placeholder="" />
+                        </div>
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" placeholder="" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" placeholder="name@example.com" />
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="tel" placeholder="+254 700 000 000" />
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="date" />
+                        </div>
+                        <div class="form-group">
+                            <label>Time</label>
+                            <select>
+                                <option value="">Select time</option>
+                                <option>8:00 AM</option>
+                                <option>9:00 AM</option>
+                                <option>10:00 AM</option>
+                                <option>11:00 AM</option>
+                                <option>12:00 PM</option>
+                                <option>1:00 PM</option>
+                                <option>2:00 PM</option>
+                                <option>3:00 PM</option>
+                                <option>4:00 PM</option>
+                                <option>5:00 PM</option>
+                                <option>6:00 PM</option>
+                                <option>7:00 PM</option>
+                                <option>8:00 PM</option>
+                                <option>9:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Number of Guests</label>
+                            <select>
+                                <option value="">Select guests</option>
+                                <option>1 Guest</option>
+                                <option>2 Guests</option>
+                                <option>3 Guests</option>
+                                <option>4 Guests</option>
+                                <option>5 Guests</option>
+                                <option>6 Guests</option>
+                                <option>7 Guests</option>
+                                <option>8 Guests</option>
+                                <option>8+ Guests</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Occasion</label>
+                            <select>
+                                <option value="">Select occasion</option>
+                                <option>Birthday</option>
+                                <option>Anniversary</option>
+                                <option>Business Dinner</option>
+                                <option>Family Dinner</option>
+                                <option>Date Night</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Special Requests</label>
+                        <textarea placeholder="Any dietary requirements, allergies or special requests..."></textarea>
+                    </div>
+
+                    <button class="booking-submit" onclick="submitBooking()">
+                        Confirm Reservation
+                    </button>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- success message -->
+    <div class="success-overlay" id="successOverlay">
+        <div class="success-box">
+            <div class="success-icon">🍽️</div>
+            <h3>Reservation Confirmed!</h3>
+            <p>Thank you for booking with us. We look forward to seeing you at The Trench Restaurant.</p>
+            <button onclick="closeSuccess()">Done</button>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">The Trench Restaurant</div>
+                <p>Bold flavors, fresh ingredients and a dining experience to remember.</p>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="Trench Restaurant website.html#menu">Menu</a></li>
+                    <li><a href="Trench Restaurant website.html#drinks">Drinks</a></li>
+                    <li><a href="Trench Restaurant website.html#specials">Specials</a></li>
+                    <li><a href="Trench Restaurant website.html#reviews">Reviews</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact</h4>
+                <ul>
+                    <li><a href="#">123 Food Street, Nairobi</a></li>
+                    <li><a href="#">+254 700 000 000</a></li>
+                    <li><a href="#">info@thetrenchrestaurant.com</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span>&copy; 2026 The Trench Restaurant. All rights reserved.</span>
+            <div>🍽</div>
+        </div>
+    </footer>
+
+    <script>
+        function submitBooking() {
+            const inputs = document.querySelectorAll('.booking-form input, .booking-form select');
+            let valid = true;
+
+            inputs.forEach(input => {
+                if (!input.value) {
+                    input.style.border = '2px solid #ff6347';
+                    valid = false;
+                } else {
+                    input.style.border = '';
+                }
+            });
+
+            if (valid) {
+                document.getElementById('successOverlay').classList.add('open');
+            }
+        }
+
+        function closeSuccess() {
+            document.getElementById('successOverlay').classList.remove('open');
+            window.location.href = 'Trench Restaurant website.html';
+        }
+    </script>
+
+</body>
+</html>
+
+</body>
+</html>
